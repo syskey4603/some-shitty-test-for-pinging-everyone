@@ -1,13 +1,23 @@
 import discord
 from discord.ext import commands
 
+spammessage = ""
 intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix='$', intents=intents)
 
 @bot.command(pass_context=True)
 async def devtest(ctx):
-	for user in ctx.guild.members:
-		await ctx.send("<@" + str(user.id) + ">")
+	while True:
+		global spammessage
+		for user in ctx.guild.members:
+			spammessage = spammessage + "<@" + str(user.id) + ">"
+		await ctx.send(spammessage)
+		spammessage = ""
 
-bot.run("OTMxODk2MDQxNTg5MDQ3MzU2.YeLF0g.jb72Cz7l1k0zJ836R2OfttG50RY")
+
+@bot.command()
+async def imbored(ctx):
+	await ctx.send(ctx.message.author.name + ", did i ask")
+
+bot.run(ez)
